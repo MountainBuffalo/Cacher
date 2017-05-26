@@ -1,0 +1,67 @@
+# Exclude the build directory
+build/*
+archive/*
+
+# Exclude code coverage files
+*.gcda
+*.gcno
+  
+# Exclude temp nibs and swap files
+*~.nib
+*.swp
+  
+# exclude carthage checkouts
+Carthage/Checkouts
+Carthage/Build/MacOS
+Carthage/Build/tvOS
+
+# Exclude OS X folder attributes
+.DS_Store
+  
+# Exclude user-specific XCode files
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+xcuserdata
+DerivedData
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+
+# Exclude ci-related files:
+.derivedDataDirectory
+
+# Exclude appcode files:
+.idea
+
+# fastlane specific
+fastlane/report.xml
+
+# deliver temporary files
+fastlane/Preview.html
+
+# snapshot generated screenshots
+fastlane/screenshots
+
+# scan temporary files
+fastlane/test_output
+
+# Exclude diff/patch/merge files
+*.diff
+*.patch
+*.orig
+
+# Exclude Crashlytics generated files from production builds
+Crashlytics.framework
+Crashlytics.framework/*
+
+# Exclude carthage artifacts
+Carthage/Checkouts
+
+# Exclude the Pods directory
+Pods
+Pods/*
