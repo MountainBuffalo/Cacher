@@ -1,6 +1,6 @@
 <p align="center"> <img src="cacher.png"/> </p>
 
-#  [![build-badge]][build-link] [![license-badge]][license-link]
+#  [![build-badge]][build-link] [![license-badge]][license-link] [![chat-badge]][chat-link]
 A simple no-nonsense image cache written entirely in swift.
 
 ## Features
@@ -24,7 +24,10 @@ If you wish to contribute to Cacher, please submit a pull request!
 Cacher is licensed under the [MIT License](license-link). As such, Casher is free for general usage, and would make an excellent addition to your next swift application!
 
 [build-link]:https://travis-ci.org/MountainBuffalo/Cacher
-[build-badge]:https://travis-ci.org/MountainBuffalo/Cacher.svg?branch=master "Travis-CI Build Status"
+[build-badge]:https://travis-ci.org/MountainBuffalo/Cacher.svg?branch=master "Travis-CI Build"
+
+[chat-link]:https://discord.gg/wJmKYnY
+[chat-badge]:https://img.shields.io/discord/318460271343697931.svg "Chat on Discord"
 
 [license-link]:https://choosealicense.com/licenses/mit/
-[license-badge]:https://img.shields.io/badge/License-MIT-yellow.svg
+[license-badge]:https://img.shields.io/badge/license-MIT-yellow.svg "MIT License"
