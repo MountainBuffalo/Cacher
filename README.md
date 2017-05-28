@@ -26,7 +26,7 @@ Cacher is licensed under the [MIT License](license-link). As such, Casher is fre
 [build-link]:https://travis-ci.org/MountainBuffalo/Cacher
 [build-badge]:https://travis-ci.org/MountainBuffalo/Cacher.svg?branch=master "Travis-CI Build"
 
-[chat-link]:https://discord.gg/wJmKYnY
+[chat-link]:https://discord.gg/385xzFb
 [chat-badge]:https://img.shields.io/discord/318460271343697931.svg "Chat on Discord"
 
 [license-link]:https://choosealicense.com/licenses/mit/
