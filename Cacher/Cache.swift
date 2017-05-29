@@ -32,7 +32,13 @@ public class CachedItem<T: Cacheable> {
 
 public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
     
-    public var cachePath: String
+    public var cachePath: String {
+        didSet {
+            if !FileManager.default.fileExists(atPath: cachePath) {
+                _ = try? FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true, attributes: nil)
+            }
+        }
+    }
     public var cacheExtension: String = "cache"
     
     internal let downloader: Downloader = Downloader()
@@ -92,10 +98,6 @@ public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
     fileprivate func save(item: CachedItem<Item>, for key: String) {
 
         let filePath = cachePath.appending(pathComponent: fileName(key: key))
-        
-        if !FileManager.default.fileExists(atPath: cachePath) {
-            _ = try? FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true, attributes: nil)
-        }
         
         if FileManager.default.fileExists(atPath: filePath) {
             _ = try? FileManager.default.removeItem(atPath: filePath)

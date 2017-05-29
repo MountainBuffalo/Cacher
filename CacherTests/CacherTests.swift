@@ -72,7 +72,10 @@ class CacherTests: XCTestCase {
     }
     
     func testAddingToDiskCacheWithNewPath() {
-        cache.cachePath = cache.cachePath.appending(pathComponent: "images")
+        let newPath = cache.cachePath.appending(pathComponent: "images")
+        XCTAssertFalse(FileManager.default.fileExists(atPath: newPath))
+        cache.cachePath = newPath
+        
         let image = self.image(from: UIColor.green)
         let addedItem = cache.add(item: image, for: "cacherImage", type: .disk)
         let loadedItem = cache.item(for: "cacherImage")
@@ -84,6 +87,13 @@ class CacherTests: XCTestCase {
         let fileName = addedItem.key.appending(pathExtension: "cache")
         let filePath = cache.cachePath.appending(pathComponent: fileName)
         XCTAssertTrue(FileManager.default.fileExists(atPath: filePath))
+        
+        cache.deleteDiskCache()
+        do {
+            try FileManager.default.removeItem(atPath: cache.cachePath)
+        } catch let error {
+            print("Error: \(error.localizedDescription)")
+        }
     }
     
     func testRemovingFromDiskCache() {
