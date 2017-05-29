@@ -17,6 +17,20 @@ Cacher can be used by following these simple steps:
     `This is a code sample.`
 4. Enjoy!
 
+## Installation
+
+### CocoaPods
+
+```ruby
+pod 'Cacher'
+```
+
+### Carthage
+
+```ogdl
+github "MountainBuffalo/Cacher"
+```
+
 ## Contributing
 If you wish to contribute to Cacher, please submit a pull request!
 
