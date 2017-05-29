@@ -33,19 +33,18 @@ public class CachedItem<T: Cacheable> {
 public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
     
     public var cachePath: String
+    public var cacheExtension: String = "cache"
     
     internal let downloader: Downloader = Downloader()
     
-    private let cache: NSCache<NSString, CachedItem<Item>>
+    internal let cache: NSCache<NSString, CachedItem<Item>>
     
     override init() {
         cache = NSCache<NSString, CachedItem<Item>>()
         
-        if let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first {
-            cachePath = cachesDirectory
-        } else {
-            cachePath = NSHomeDirectory().appending(pathComponent: "Libary/Caches/")
-        }
+        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+        cachePath = cachesDirectory
+        
         super.init()
         cache.delegate = self
     }
@@ -65,26 +64,13 @@ public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
             return item
         }
         
-        guard type == .disk,
-            let fileName = key.appending(pathExtension: "cache") else {
-                return nil
+        guard type == .disk else {
+            return nil
         }
         
-        let filePath = cachePath.appending(pathComponent: fileName)
+        let filePath = cachePath.appending(pathComponent: fileName(key: key))
         let fileUrl = URL(fileURLWithPath: filePath)
-        guard FileManager.default.fileExists(atPath: filePath) else {
-            return nil
-        }
-        
-        let data: Data
-        do {
-            data = try Data(contentsOf: fileUrl)
-        } catch {
-            print(error as Error)
-            return nil
-        }
-        
-        guard let value = Item(data: data) else {
+        guard FileManager.default.fileExists(atPath: filePath), let data = try? Data(contentsOf: fileUrl), let value = Item(data: data) else {
             return nil
         }
         
@@ -97,14 +83,15 @@ public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
     public func remove(with key: String) -> CachedItem<Item>? {
         let object = cache.object(forKey: key as NSString)
         cache.removeObject(forKey: key as NSString)
+        if let item = object, item.type == .disk {
+            delete(item: item, for: key)
+        }
         return object
     }
     
     fileprivate func save(item: CachedItem<Item>, for key: String) {
-        guard let fileName = key.appending(pathExtension: "cache") else {
-            return
-        }
-        let filePath = cachePath.appending(pathComponent: fileName)
+
+        let filePath = cachePath.appending(pathComponent: fileName(key: key))
         
         if !FileManager.default.fileExists(atPath: cachePath) {
             _ = try? FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true, attributes: nil)
@@ -119,6 +106,32 @@ public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
         }
     }
     
+    fileprivate func delete(item: CachedItem<Item>, for key: String) {
+        let filePath = cachePath.appending(pathComponent: fileName(key: key))
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            _ = try? FileManager.default.removeItem(atPath: filePath)
+        }
+    }
+    
+    public func dropMemoryCache() {
+        cache.removeAllObjects()
+    }
+    
+    public func deleteDiskCache() {
+        let allFiles = try? FileManager.default.contentsOfDirectory(atPath: cachePath)
+            
+        let cacheFiles = allFiles?.filter { $0.contains(".\(cacheExtension)") }
+        
+        cacheFiles?.forEach {
+            _ = try? FileManager.default.removeItem(atPath: cachePath.appending(pathComponent: $0))
+        }
+    }
+    
+    private func fileName(key: String) -> String {
+        return key.appending(pathExtension: cacheExtension)
+    }
+    
     //MARK - NSCacheDelegate
     public func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any) {
         guard let cachedItem = obj as? CachedItem<Item>,
@@ -128,4 +141,6 @@ public class Cache<Item: Cacheable>: NSObject, NSCacheDelegate {
         
         save(item: cachedItem, for: cachedItem.key)
     }
+    
+    
 }

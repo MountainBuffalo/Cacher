@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D03660311EDB89AF00CF2297 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */; };
+		D03660331EDB8EEC00CF2297 /* cacher.png in Resources */ = {isa = PBXBuildFile; fileRef = D036602E1EDB807500CF2297 /* cacher.png */; };
+		D03660341EDB913B00CF2297 /* cacher.png in Resources */ = {isa = PBXBuildFile; fileRef = D036602E1EDB807500CF2297 /* cacher.png */; };
 		D0955CF41ED7B30B002F323C /* Cacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0955CEA1ED7B30B002F323C /* Cacher.framework */; };
 		D0955CF91ED7B30B002F323C /* CacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955CF81ED7B30B002F323C /* CacherTests.swift */; };
 		D0955CFB1ED7B30B002F323C /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955CED1ED7B30B002F323C /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D036602E1EDB807500CF2297 /* cacher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cacher.png; sourceTree = "<group>"; };
+		D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
 		D0955CEA1ED7B30B002F323C /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0955CED1ED7B30B002F323C /* Cacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
 		D0955CEE1ED7B30B002F323C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				D0955CF81ED7B30B002F323C /* CacherTests.swift */,
+				D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */,
 				D0955CFA1ED7B30B002F323C /* Info.plist */,
+				D036602E1EDB807500CF2297 /* cacher.png */,
 			);
 			path = CacherTests;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03660331EDB8EEC00CF2297 /* cacher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03660341EDB913B00CF2297 /* cacher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D03660311EDB89AF00CF2297 /* ImageCacheTests.swift in Sources */,
 				D0955CF91ED7B30B002F323C /* CacherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

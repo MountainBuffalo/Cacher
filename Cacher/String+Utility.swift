@@ -18,7 +18,7 @@ extension String {
         return (self as NSString).appendingPathComponent(pathComponent)
     }
     
-    func appending(pathExtension: String) -> String? {
-        return (self as NSString).appendingPathExtension(pathExtension)
+    func appending(pathExtension: String) -> String {
+        return (self as NSString).appendingPathExtension(pathExtension)!
     }
 }
