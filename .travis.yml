@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode8
 env:
   global:
-  - PROJECT=Cacher.xcodeproj
+  - WORKSPACE=Cacher.xcworkspace
   - IOS_FRAMEWORK_SCHEME="Cacher"
   - IOS_SDK=iphonesimulator10.0
   matrix:
@@ -15,7 +15,7 @@ script:
   - xcodebuild -showsdks
 
   # Build Framework in Debug and Run Tests if specified
-  - travis_retry xcodebuild -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
+  - travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'Cacher'
+  - bash <(curl -s https://codecov.io/bash)

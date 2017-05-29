@@ -1,4 +1,0 @@
-coverage:
-
-  ignore: # files and folders for processing
-    - CacherTests/*
