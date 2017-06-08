@@ -15,6 +15,6 @@ extension UIImage: Cacheable {
     }
 }
 
-class ImageCache: Cache<UIImage> {
+public class ImageCache: Cache<UIImage> {
     public static var shared = ImageCache()
 }
