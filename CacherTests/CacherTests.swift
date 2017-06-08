@@ -23,7 +23,7 @@ class CacherTests: XCTestCase {
         return UIGraphicsGetImageFromCurrentImageContext()!
     }
     
-    var cache: Cache<UIImage>!
+    var cache: Cache<String, UIImage>!
     
     override func setUp() {
         super.setUp()
@@ -71,7 +71,7 @@ class CacherTests: XCTestCase {
         XCTAssertTrue(FileManager.default.fileExists(atPath: filePath))
     }
     
-    func testAddingToDiskCacheWithNewPath() {
+    func testAddingToDiskCacheWithNewPath() throws {
         let newPath = cache.cachePath.appending(pathComponent: "images")
         XCTAssertFalse(FileManager.default.fileExists(atPath: newPath))
         cache.cachePath = newPath
@@ -89,11 +89,7 @@ class CacherTests: XCTestCase {
         XCTAssertTrue(FileManager.default.fileExists(atPath: filePath))
         
         cache.deleteDiskCache()
-        do {
-            try FileManager.default.removeItem(atPath: cache.cachePath)
-        } catch let error {
-            print("Error: \(error.localizedDescription)")
-        }
+        try FileManager.default.removeItem(atPath: cache.cachePath)
     }
     
     func testRemovingFromDiskCache() {

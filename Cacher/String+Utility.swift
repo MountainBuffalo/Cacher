@@ -22,3 +22,16 @@ extension String {
         return (self as NSString).appendingPathExtension(pathExtension)!
     }
 }
+
+
+extension String: CacheableKey {
+    public typealias objType = NSString
+    
+    public func toObjType() -> objType {
+        return self as NSString
+    }
+  
+    public var stringValue: String {
+        return self
+    }
+}

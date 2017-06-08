@@ -24,7 +24,7 @@ class ImageCacheTests: XCTestCase {
     }
     
     func testImageViewSetterDownload() {
-        let bundle = Bundle(for: Downloader.self)
+        let bundle = Bundle(for: ImageCacheTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -44,17 +44,17 @@ class ImageCacheTests: XCTestCase {
     
     func testImageVeiwSetterCache() {
         
-        let bundle = Bundle(for: Downloader.self)
+        let bundle = Bundle(for: ImageCacheTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
         let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)!
-        ImageCache.shared.add(item: image, for: imageUrl!.absoluteString.sha1)
+        ImageCache.shared.add(item: image, for: imageUrl!)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
         let expectation = self.expectation(description: "ImageDownload")
         
         var didDownload = true
-        imageView.set(url: imageUrl!, cacheType: .memory, completion: { (_, downloaded) in
+        imageView.set(url: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
             didDownload = downloaded
             expectation.fulfill()
         })
@@ -62,6 +62,11 @@ class ImageCacheTests: XCTestCase {
         waitForExpectations(timeout: 2, handler: nil)
         XCTAssertNotNil(imageView.image)
         XCTAssertFalse(didDownload)
+        
+        let fileName = imageUrl!.stringValue.appending(pathExtension: "cache")
+        let filePath = ImageCache.shared.cachePath.appending(pathComponent: fileName)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: filePath))
+        
     }
     
     func testImageViewSetterNonImageURL() {
