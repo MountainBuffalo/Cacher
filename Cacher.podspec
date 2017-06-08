@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Cacher"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "A simple no-nonsense image cache written entirely in swift."
 
   # This description is used to generate tags and improve search results.
