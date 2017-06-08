@@ -15,6 +15,25 @@ extension UIImage: Cacheable {
     }
 }
 
-public class ImageCache: Cache<UIImage> {
+extension URL: CacheableKey {
+    public typealias objType = NSURL
+    
+    public func toObjType() -> objType {
+        return self as NSURL
+    }
+    
+    public var stringValue: String {
+        return self.absoluteString.sha1
+    }
+}
+
+public class ImageCache: Cache<URL, UIImage> {
     public static var shared = ImageCache()
+}
+
+public class ImagePrecacher: Precacher<UIImage> {
+    
+    public init(imageCache: ImageCache) {
+        super.init(cache: imageCache)
+    }
 }
