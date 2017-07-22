@@ -1,6 +1,6 @@
 //
 //  Cache.swift
-//  ImageCacher
+//  Cacher
 //
 //  Created by Justin Anderson on 4/29/17.
 //  Copyright © 2017 Mountain Buffalo Limited. All rights reserved.
@@ -8,173 +8,206 @@
 
 import Foundation
 
+public enum DownloadError: Error {
+    case wrongDataType
+}
+
 public protocol CacheableKey {
-    associatedtype objType: NSObjectProtocol
-    func toObjType() -> objType
+    associatedtype ObjectType: NSObjectProtocol
+    func toObjectType() -> ObjectType
     var stringValue: String { get }
 }
 
+public struct CacheOptions: OptionSet {
+    
+    public let rawValue: UInt
+    public init(rawValue: UInt) {
+        self.rawValue = rawValue
+    }
+    
+    public static let refreshCached = CacheOptions(rawValue: 1 << 0)
+}
+
 public enum CachedItemType {
+    
+    ///The item is/should not be on disk
     case memory
+    
+    ///The item saved in both disk and memory caches
     case disk
+    
+    ///The item is only on disk and is never in memory caches
+    case diskOnly
+    
+    ///The item uses the property on the cache
+    case `default`
+    
+    fileprivate var shouldSave: Bool {
+        return self == .disk || self == .diskOnly
+    }
+    
+    fileprivate var shouldMemoryCache: Bool {
+        return self == .memory || self == .disk
+    }
 }
 
 public protocol Cacheable {
     init?(data: Data)
-    func cachedData() -> Data?
+    func getDataRepresentation() -> Data?
 }
 
-public class CachedItem<Key: CacheableKey, T: Cacheable> {
+public class CachedItem<T: Cacheable> {
     public let type: CachedItemType
     public let item: T
-    public let key: Key
     
-    public init(key: Key, item: T, type: CachedItemType = .memory) {
+    public init(item: T, type: CachedItemType = .memory) {
         self.type = type
         self.item = item
-        self.key = key
     }
 }
 
-public class Cache<Key: CacheableKey, Item: Cacheable>: NSObject, NSCacheDelegate {
+open class Cache<Key: CacheableKey, Item: Cacheable> {
     
-    public var cachePath: String {
-        didSet {
-            if !FileManager.default.fileExists(atPath: cachePath) {
-                _ = try? FileManager.default.createDirectory(atPath: cachePath, withIntermediateDirectories: true, attributes: nil)
-            }
-        }
-    }
-    public var cacheExtension: String = "cache"
+    public typealias Element = CachedItem<Item>
     
     private let downloader: Downloader = Downloader()
     
-    internal let cache: NSCache<Key.objType, CachedItem<Key, Item>>
+    fileprivate let cache: NSCache<Key.ObjectType, Element>
+    public let diskCache: DiskCache<Key, Item>
     
-    override init() {
+    /// This is the default cache type for all items added to the cache
+    /// - NOTE: Setting this to `default` is undefined
+    public var cacheType: CachedItemType = .disk
+    
+    /// Initlizes the class
+    ///
+    /// - Parameter directory: An optional directory where disk cache is saved
+    public init(directory: String? = nil) {
         cache = NSCache()
-        
-        let cachesDirectory = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-        cachePath = cachesDirectory
-        
-        super.init()
-        cache.delegate = self
+        diskCache = DiskCache<Key, Item>(directory: directory)
     }
     
-    @discardableResult
-    public func add(item: Item, for key: Key, type: CachedItemType = .memory) -> CachedItem<Key, Item> {
-        let newItem = CachedItem<Key, Item>(key: key, item: item, type: type)
-        cache.setObject(newItem, forKey: key.toObjType())
-        if type == .disk {
-            save(item: newItem, for: key)
+    init(diskCache: DiskCache<Key, Item>) {
+        cache = NSCache()
+        
+        self.diskCache = diskCache
+    }
+    
+    /// Adds items to cache
+    ///
+    /// - Parameters:
+    ///   - item: The item to be added
+    ///   - key: The key the item is to be saved under
+    ///   - type: The cache it is saved to, the default is to use cacheType on this class
+    /// - Returns: The added element. This is discardable
+    /// - Throws: An file error if the type is disk or diskOnly
+    @discardableResult public func add(item: Item, for key: Key, type: CachedItemType = .default) throws -> Element {
+        return try add(item: item, for: key, type: type, isSaved: false)
+    }
+    
+    private func add(item: Item, for key: Key, type: CachedItemType = .default, isSaved: Bool) throws -> Element {
+        let newItem = Element(item: item, type: type)
+        
+        let itemType = (type == .default) ? self.cacheType : type
+        
+        if itemType.shouldMemoryCache {
+            cache.setObject(newItem, forKey: key.toObjectType())
         }
+        
+        if itemType.shouldSave && !isSaved {
+            try diskCache.save(item: newItem, for: key)
+        }
+        
         return newItem
     }
     
-    public func item(for key: Key, type: CachedItemType = .memory) -> CachedItem<Key, Item>? {
-        if let item = cache.object(forKey: key.toObjType()) {
+    /// Checks memory cache then checks disk cache for the item
+    ///
+    /// - Parameters:
+    ///   - key: The key for the requested item
+    ///   - type: The type of cache the item is loaded from. If memory then it will only check memory. The default is to use cacheType on this class
+    /// - Returns: The item found based of the key or returns nil if not found
+    public func item(for key: Key, type: CachedItemType = .default) -> Element? {
+        if let item = cache.object(forKey: key.toObjectType()) {
             return item
         }
         
-        guard type == .disk else {
+        guard type != .memory, let value = diskCache.item(forKey: key) else {
             return nil
         }
         
-        let filePath = cachePath.appending(pathComponent: fileName(key: key.stringValue))
-        let fileUrl = URL(fileURLWithPath: filePath)
-        guard FileManager.default.fileExists(atPath: filePath), let data = try? Data(contentsOf: fileUrl), let value = Item(data: data) else {
-            return nil
-        }
+        let newItem = CachedItem(item: value, type: .disk)
         
-        let newItem = CachedItem(key: key, item: value, type: type)
+        if type != .diskOnly {
+            //We got this far so the image isnt in memory cache so lets add it.
+            cache.setObject(newItem, forKey: key.toObjectType())
+        }
         
         return newItem
     }
     
-    public func get(from url: URL, key: Key, cacheType: CachedItemType = .memory, completion: ((CachedItem<Key, Item>?, Bool, Error?) -> Void)?) {
-        
-        if let cachedItem = item(for: key, type: cacheType) {
-            completion?(cachedItem, false, nil)
+    /// Loads the item from cache if exists, otherwise if the item not in cache it fetches it from the url given
+    ///
+    /// - Parameters:
+    ///   - url: The url for the Item
+    ///   - key: The key the item should save with
+    ///   - cacheType: The type of cache the items should be saved as. The default is to use cacheType on this class
+    ///   - options: Options on for the cache and how it should handle items
+    ///   - completion: A handler to for the item (Item, DidDownload, Error).
+    /// - NOTE: the completion handler may not return on the main queue
+    public func load(from url: URL, key: Key, cacheType: CachedItemType = .default, options: CacheOptions = [], completion: @escaping ((Element?, Bool, Error?) -> Void)) {
+        if let cachedItem = item(for: key, type: cacheType), !options.contains(.refreshCached) {
+            completion(cachedItem, false, nil)
             return
         }
         
+        let itemType: CachedItemType = (cacheType == .default) ? self.cacheType : cacheType
+        
         downloader.get(with: url) { [weak self] (data, error) in
             guard let data = data else {
-                if let error = error {
-                    completion?(nil, false, error)
-                }
+                completion(nil, false, error)
                 return
             }
             
             guard let item = Item(data: data) else {
-                let error = NSError(domain: "URL is not a vaild Item", code: 1000, userInfo: nil)
-                completion?(nil, false, error)
+                //This is to check that item downloaded is the correct item type that we expect
+                completion(nil, false, DownloadError.wrongDataType)
                 return
             }
             
-            let cachedItem = self?.add(item: item, for: key, type: cacheType)
-            completion?(cachedItem, true, nil)
+            let cachedItem: Element?
+            
+            do {
+                //If the item cacheType is we'll handling saving is this method so we dont have to keep passing the data around
+                cachedItem = try self?.add(item: item, for: key, type: cacheType, isSaved: true)
+            } catch {
+                completion(nil, false, error)
+                return
+            }
+            
+            if itemType.shouldSave {
+                _ = try? self?.diskCache.save(data: data, for: key)
+            }
+            
+            completion(cachedItem, true, nil)
         }
     }
     
-    @discardableResult
-    public func remove(with key: Key) -> CachedItem<Key, Item>? {
-        let object = cache.object(forKey: key.toObjType())
-        cache.removeObject(forKey: key.toObjType())
-        if let item = object, item.type == .disk {
-            delete(item: item, for: key)
+    /// Removes an item from cache and deletes if from disk if appilcable
+    ///
+    /// - Parameter key: The key for the item to remove
+    /// - Returns: The element only if it is in memory cache
+    /// - Throws: A file error if the item cannot be deleted from disk
+    @discardableResult public func removeItem(withKey key: Key) throws -> Element? {
+        let object = cache.object(forKey: key.toObjectType())
+        cache.removeObject(forKey: key.toObjectType())
+        if let item = object, item.type.shouldSave {
+            try diskCache.delete(for: key)
         }
         return object
     }
     
-    fileprivate func save(item: CachedItem<Key, Item>, for key: Key) {
-
-        let filePath = cachePath.appending(pathComponent: fileName(key: key.stringValue))
-        
-        if FileManager.default.fileExists(atPath: filePath) {
-            _ = try? FileManager.default.removeItem(atPath: filePath)
-        }
-        
-        if let cachedData = item.item.cachedData() {
-            (cachedData as NSData).write(toFile: filePath, atomically: true)
-        }
-    }
-    
-    fileprivate func delete(item: CachedItem<Key, Item>, for key: Key) {
-        let filePath = cachePath.appending(pathComponent: fileName(key: key.stringValue))
-        
-        if FileManager.default.fileExists(atPath: filePath) {
-            _ = try? FileManager.default.removeItem(atPath: filePath)
-        }
-    }
-    
-    public func dropMemoryCache() {
+    public func removeMemoryCache() {
         cache.removeAllObjects()
     }
-    
-    public func deleteDiskCache() {
-        let allFiles = try? FileManager.default.contentsOfDirectory(atPath: cachePath)
-            
-        let cacheFiles = allFiles?.filter { $0.contains(".\(cacheExtension)") }
-        
-        cacheFiles?.forEach {
-            _ = try? FileManager.default.removeItem(atPath: cachePath.appending(pathComponent: $0))
-        }
-    }
-    
-    private func fileName(key: String) -> String {
-        return key.appending(pathExtension: cacheExtension)
-    }
-    
-    //MARK - NSCacheDelegate
-    public func cache(_ cache: NSCache<AnyObject, AnyObject>, willEvictObject obj: Any) {
-        guard let cachedItem = obj as? CachedItem<Key, Item>,
-            cachedItem.type == .disk else {
-                return
-        }
-        
-        save(item: cachedItem, for: cachedItem.key)
-    }
-    
-    
 }

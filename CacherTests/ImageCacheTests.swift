@@ -19,8 +19,8 @@ class ImageCacheTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        ImageCache.shared.dropMemoryCache()
-        ImageCache.shared.deleteDiskCache()
+        ImageCache.shared.removeMemoryCache()
+        _ = try? ImageCache.shared.diskCache.deleteDiskCache()
     }
     
     func testImageViewSetterDownload() {
@@ -42,12 +42,12 @@ class ImageCacheTests: XCTestCase {
         XCTAssertTrue(didDownload)
     }
     
-    func testImageVeiwSetterCache() {
+    func testImageVeiwSetterCache() throws {
         
         let bundle = Bundle(for: ImageCacheTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
         let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)!
-        ImageCache.shared.add(item: image, for: imageUrl!)
+        try ImageCache.shared.add(item: image, for: imageUrl!)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
@@ -62,11 +62,6 @@ class ImageCacheTests: XCTestCase {
         waitForExpectations(timeout: 2, handler: nil)
         XCTAssertNotNil(imageView.image)
         XCTAssertFalse(didDownload)
-        
-        let fileName = imageUrl!.stringValue.appending(pathExtension: "cache")
-        let filePath = ImageCache.shared.cachePath.appending(pathComponent: fileName)
-        XCTAssertFalse(FileManager.default.fileExists(atPath: filePath))
-        
     }
     
     func testImageViewSetterNonImageURL() {
@@ -101,4 +96,34 @@ class ImageCacheTests: XCTestCase {
         XCTAssertNil(imageView.image)
     }
     
+    func testThatCorrectImageIsDisplaied() {
+        
+        let expectation = self.expectation(description: "Wait for image download")
+        
+        let bundle = Bundle(for: ImageCacheTests.self)
+        let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
+        
+        let imageUrl2 = bundle.url(forResource: "cacher2", withExtension: "png")
+        
+        var numberOfTimesSet = 0
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        
+        imageView.set(url: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
+            //This should never be called
+            numberOfTimesSet += 1
+            expectation.fulfill()
+        })
+        
+        imageView.set(url: imageUrl2!, cacheType: .disk, completion: { (_, downloaded) in
+            if downloaded {
+                numberOfTimesSet += 1
+            }
+            expectation.fulfill()
+        })
+        
+        waitForExpectations(timeout: 3) { (error: Error?) in
+            XCTAssertEqual(numberOfTimesSet, 1)
+        }
+    }
 }
