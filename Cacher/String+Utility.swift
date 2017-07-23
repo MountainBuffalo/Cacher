@@ -14,24 +14,27 @@ extension String {
         return (self as NSString).sha1()
     }
     
-    func appending(pathComponent: String) -> String {
-        return (self as NSString).appendingPathComponent(pathComponent)
-    }
-    
     func appending(pathExtension: String) -> String {
         return (self as NSString).appendingPathExtension(pathExtension)!
     }
 }
 
-
 extension String: CacheableKey {
-    public typealias objType = NSString
+    public typealias ObjectType = NSString
     
-    public func toObjType() -> objType {
+    public func toObjectType() -> ObjectType {
         return self as NSString
     }
-  
+    
     public var stringValue: String {
         return self
+    }
+}
+
+extension FileManager {
+    
+    func fileExists(atFileURL url: URL) -> Bool {
+        guard url.isFileURL else { return false }
+        return self.fileExists(atPath: url.path)
     }
 }

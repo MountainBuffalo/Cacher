@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E63CD9F1EE9E378002672D8 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E63CD9E1EE9E378002672D8 /* Precacher.swift */; };
 		D03660311EDB89AF00CF2297 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */; };
 		D03660341EDB913B00CF2297 /* cacher.png in Resources */ = {isa = PBXBuildFile; fileRef = D036602E1EDB807500CF2297 /* cacher.png */; };
+		D064528A1F240BDE00DE4830 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06452891F240BDE00DE4830 /* DiskCache.swift */; };
+		D064528C1F240C6700DE4830 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528B1F240C6700DE4830 /* Precacher.swift */; };
+		D064528E1F240D4A00DE4830 /* PrecacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528D1F240D4A00DE4830 /* PrecacherTests.swift */; };
+		D06452901F240EA900DE4830 /* cacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = D064528F1F240EA900DE4830 /* cacher2.png */; };
 		D0955CF41ED7B30B002F323C /* Cacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0955CEA1ED7B30B002F323C /* Cacher.framework */; };
 		D0955CF91ED7B30B002F323C /* CacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955CF81ED7B30B002F323C /* CacherTests.swift */; };
 		D0955CFB1ED7B30B002F323C /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955CED1ED7B30B002F323C /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,9 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4E63CD9E1EE9E378002672D8 /* Precacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Precacher.swift; sourceTree = "<group>"; };
 		D036602E1EDB807500CF2297 /* cacher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cacher.png; sourceTree = "<group>"; };
 		D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCacheTests.swift; sourceTree = "<group>"; };
+		D06452891F240BDE00DE4830 /* DiskCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
+		D064528B1F240C6700DE4830 /* Precacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Precacher.swift; sourceTree = "<group>"; };
+		D064528D1F240D4A00DE4830 /* PrecacherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecacherTests.swift; sourceTree = "<group>"; };
+		D064528F1F240EA900DE4830 /* cacher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cacher2.png; sourceTree = "<group>"; };
 		D0955CEA1ED7B30B002F323C /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0955CED1ED7B30B002F323C /* Cacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
 		D0955CEE1ED7B30B002F323C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,9 +100,10 @@
 				D0955CED1ED7B30B002F323C /* Cacher.h */,
 				D0955CEE1ED7B30B002F323C /* Info.plist */,
 				D0955D041ED7B3D6002F323C /* Cache.swift */,
-				4E63CD9E1EE9E378002672D8 /* Precacher.swift */,
+				D06452891F240BDE00DE4830 /* DiskCache.swift */,
 				D0955D051ED7B3D6002F323C /* Downloader.swift */,
 				D0955D061ED7B3D6002F323C /* ImageCache.swift */,
+				D064528B1F240C6700DE4830 /* Precacher.swift */,
 				D0955D071ED7B3D6002F323C /* NSString+Hash.h */,
 				D0955D081ED7B3D6002F323C /* NSString+Hash.m */,
 				D0955D091ED7B3D6002F323C /* String+Utility.swift */,
@@ -110,7 +117,9 @@
 			children = (
 				D0955CF81ED7B30B002F323C /* CacherTests.swift */,
 				D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */,
+				D064528D1F240D4A00DE4830 /* PrecacherTests.swift */,
 				D0955CFA1ED7B30B002F323C /* Info.plist */,
+				D064528F1F240EA900DE4830 /* cacher2.png */,
 				D036602E1EDB807500CF2297 /* cacher.png */,
 			);
 			path = CacherTests;
@@ -218,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D06452901F240EA900DE4830 /* cacher2.png in Resources */,
 				D03660341EDB913B00CF2297 /* cacher.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,9 +243,10 @@
 				D0955D101ED7B3D6002F323C /* String+Utility.swift in Sources */,
 				D0955D0F1ED7B3D6002F323C /* NSString+Hash.m in Sources */,
 				D0955D0C1ED7B3D6002F323C /* Downloader.swift in Sources */,
-				4E63CD9F1EE9E378002672D8 /* Precacher.swift in Sources */,
 				D0955D0B1ED7B3D6002F323C /* Cache.swift in Sources */,
+				D064528A1F240BDE00DE4830 /* DiskCache.swift in Sources */,
 				D0955D111ED7B3D6002F323C /* UIImageView+Cache.swift in Sources */,
+				D064528C1F240C6700DE4830 /* Precacher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +256,7 @@
 			files = (
 				D03660311EDB89AF00CF2297 /* ImageCacheTests.swift in Sources */,
 				D0955CF91ED7B30B002F323C /* CacherTests.swift in Sources */,
+				D064528E1F240D4A00DE4830 /* PrecacherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
