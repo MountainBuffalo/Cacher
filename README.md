@@ -1,7 +1,7 @@
 <p align="center"> <img src="cacher.png"/> </p>
 
 #  [![build-badge]][build-link] [![codecov-badge]][codecov-link] [![license-badge]][license-link]
-A simple no-nonsense image cache written entirely in swift.
+A simple general use cache written entirely in swift. Anything can be added to the cache as long as it subscribes to the `Cacheable` protocol, and anything as a key as long as it subscribes to `CacheableKey` protocol. 
 
 ## Features
 - Lightweight Caching generic
