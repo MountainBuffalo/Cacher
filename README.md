@@ -1,21 +1,65 @@
 <p align="center"> <img src="cacher.png"/> </p>
 
-#  [![build-badge]][build-link] [![codecov-badge]][codecov-link] [![license-badge]][license-link] [![chat-badge]][chat-link]
+#  [![build-badge]][build-link] [![codecov-badge]][codecov-link] [![license-badge]][license-link]
 A simple no-nonsense image cache written entirely in swift.
 
 ## Features
-- Lightweight Image Caching
+- Lightweight Caching generic
 - Does One Thing & Does It Well
 
 ## Usage
-Cacher can be used by following these simple steps:
 
-1. Download  
-    `git clone https://github.com/MountainBuffalo/Cacher.git`
-2. Integrate
-3. Code  
-    `This is a code sample.`
-4. Enjoy!
+Create a cache
+```swift
+let cache = Cache<String: Data>()
+```
+
+Add an item to a cache
+```swift
+let item = Data()
+cache.add(item: item, for: "MyItem")
+```
+
+Get an item from cache
+```swift
+let cachedItem = cache.item(for: "MyItem")
+```
+
+Get an item from a url
+```swift
+cache.load(from: someUrl, key: "MyItem") { cachedItem, wasDownload, error in
+
+}
+```
+
+#### Built in Image Cache
+
+Add an item to a cache
+```swift
+let image = UIImage()
+ImageCache.shared.add(item: image, for: "MyItem")
+```
+
+Get an item from cache
+```swift
+let cachedImage = ImageCache.shared.item(for: "MyItem").item
+```
+
+Setting an image on an image view
+```swift
+imageView.set(url: someUrl)
+```
+
+#### Precaching
+
+Downloading images right to cache for later use
+```swift
+let imagePrecher = ImagePrecher()
+imagePrecher.get(urls: myUrls) { items, failedUrls in
+  //Do something
+}
+```
+
 
 ## Installation
 
@@ -42,9 +86,6 @@ Cacher is licensed under the [MIT License](license-link). As such, Casher is fre
 
 [codecov-link]:http://codecov.io/github/MountainBuffalo/Cacher
 [codecov-badge]:http://codecov.io/github/MountainBuffalo/Cacher/coverage.svg "Code Coverage"
-
-[chat-link]:https://mountainbuffalo.slack.com/signup
-[chat-badge]:https://img.shields.io/badge/chat-Slack-ff69b4.svg "Chat on Slack"
 
 [license-link]:https://choosealicense.com/licenses/mit/
 [license-badge]:https://img.shields.io/badge/license-MIT-yellow.svg "MIT License"
