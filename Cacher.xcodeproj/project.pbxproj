@@ -13,6 +13,46 @@
 		D064528C1F240C6700DE4830 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528B1F240C6700DE4830 /* Precacher.swift */; };
 		D064528E1F240D4A00DE4830 /* PrecacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528D1F240D4A00DE4830 /* PrecacherTests.swift */; };
 		D06452901F240EA900DE4830 /* cacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = D064528F1F240EA900DE4830 /* cacher2.png */; };
+		D064529F1F24197100DE4830 /* Cacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06452961F24197000DE4830 /* Cacher.framework */; };
+		D06452AD1F24198400DE4830 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D041ED7B3D6002F323C /* Cache.swift */; };
+		D06452AE1F24198400DE4830 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06452891F240BDE00DE4830 /* DiskCache.swift */; };
+		D06452AF1F24198400DE4830 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D051ED7B3D6002F323C /* Downloader.swift */; };
+		D06452B01F24198400DE4830 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D061ED7B3D6002F323C /* ImageCache.swift */; };
+		D06452B11F24198400DE4830 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528B1F240C6700DE4830 /* Precacher.swift */; };
+		D06452B21F24198400DE4830 /* NSString+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955D071ED7B3D6002F323C /* NSString+Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06452B31F24198400DE4830 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = D0955D081ED7B3D6002F323C /* NSString+Hash.m */; };
+		D06452B41F24198400DE4830 /* String+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D091ED7B3D6002F323C /* String+Utility.swift */; };
+		D06452B71F2419DE00DE4830 /* CacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955CF81ED7B30B002F323C /* CacherTests.swift */; };
+		D06452B91F2419DE00DE4830 /* PrecacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528D1F240D4A00DE4830 /* PrecacherTests.swift */; };
+		D06452BA1F2419DE00DE4830 /* cacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = D064528F1F240EA900DE4830 /* cacher2.png */; };
+		D06452BB1F2419DE00DE4830 /* cacher.png in Resources */ = {isa = PBXBuildFile; fileRef = D036602E1EDB807500CF2297 /* cacher.png */; };
+		D06452CE1F24215D00DE4830 /* Cacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D06452C51F24215D00DE4830 /* Cacher.framework */; };
+		D06452DC1F2421A400DE4830 /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955CED1ED7B30B002F323C /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06452DE1F2421A400DE4830 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D041ED7B3D6002F323C /* Cache.swift */; };
+		D06452DF1F2421A400DE4830 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06452891F240BDE00DE4830 /* DiskCache.swift */; };
+		D06452E01F2421A400DE4830 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D051ED7B3D6002F323C /* Downloader.swift */; };
+		D06452E11F2421A400DE4830 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D061ED7B3D6002F323C /* ImageCache.swift */; };
+		D06452E21F2421A400DE4830 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528B1F240C6700DE4830 /* Precacher.swift */; };
+		D06452E31F2421A400DE4830 /* NSString+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955D071ED7B3D6002F323C /* NSString+Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06452E41F2421A400DE4830 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = D0955D081ED7B3D6002F323C /* NSString+Hash.m */; };
+		D06452E51F2421A400DE4830 /* String+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D091ED7B3D6002F323C /* String+Utility.swift */; };
+		D06452E61F2421A400DE4830 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D0A1ED7B3D6002F323C /* UIImageView+Cache.swift */; };
+		D06452E71F2421B800DE4830 /* CacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955CF81ED7B30B002F323C /* CacherTests.swift */; };
+		D06452E81F2421B800DE4830 /* ImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03660301EDB89AF00CF2297 /* ImageCacheTests.swift */; };
+		D06452E91F2421B800DE4830 /* PrecacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528D1F240D4A00DE4830 /* PrecacherTests.swift */; };
+		D06452EA1F2421B800DE4830 /* cacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = D064528F1F240EA900DE4830 /* cacher2.png */; };
+		D06452EB1F2421B800DE4830 /* cacher.png in Resources */ = {isa = PBXBuildFile; fileRef = D036602E1EDB807500CF2297 /* cacher.png */; };
+		D06452FA1F2424D200DE4830 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D041ED7B3D6002F323C /* Cache.swift */; };
+		D06452FB1F2424D200DE4830 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06452891F240BDE00DE4830 /* DiskCache.swift */; };
+		D06452FC1F2424D200DE4830 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D051ED7B3D6002F323C /* Downloader.swift */; };
+		D06452FD1F2424D200DE4830 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D061ED7B3D6002F323C /* ImageCache.swift */; };
+		D06452FE1F2424D200DE4830 /* Precacher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D064528B1F240C6700DE4830 /* Precacher.swift */; };
+		D06452FF1F2424D200DE4830 /* NSString+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955D071ED7B3D6002F323C /* NSString+Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06453001F2424D200DE4830 /* NSString+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = D0955D081ED7B3D6002F323C /* NSString+Hash.m */; };
+		D06453011F2424D200DE4830 /* String+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955D091ED7B3D6002F323C /* String+Utility.swift */; };
+		D06453081F242CDB00DE4830 /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D06453061F242CDB00DE4830 /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D06453091F242CDB00DE4830 /* NSImage+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06453071F242CDB00DE4830 /* NSImage+Utility.swift */; };
+		D064530C1F242D4700DE4830 /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D064530B1F242D4700DE4830 /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0955CF41ED7B30B002F323C /* Cacher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0955CEA1ED7B30B002F323C /* Cacher.framework */; };
 		D0955CF91ED7B30B002F323C /* CacherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0955CF81ED7B30B002F323C /* CacherTests.swift */; };
 		D0955CFB1ED7B30B002F323C /* Cacher.h in Headers */ = {isa = PBXBuildFile; fileRef = D0955CED1ED7B30B002F323C /* Cacher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -26,6 +66,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D06452A01F24197100DE4830 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0955CE11ED7B30B002F323C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D06452951F24197000DE4830;
+			remoteInfo = "Cacher-Mac";
+		};
+		D06452CF1F24215D00DE4830 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0955CE11ED7B30B002F323C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D06452C41F24215D00DE4830;
+			remoteInfo = "Cacher-tvOS";
+		};
 		D0955CF51ED7B30B002F323C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0955CE11ED7B30B002F323C /* Project object */;
@@ -42,6 +96,14 @@
 		D064528B1F240C6700DE4830 /* Precacher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Precacher.swift; sourceTree = "<group>"; };
 		D064528D1F240D4A00DE4830 /* PrecacherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecacherTests.swift; sourceTree = "<group>"; };
 		D064528F1F240EA900DE4830 /* cacher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cacher2.png; sourceTree = "<group>"; };
+		D06452961F24197000DE4830 /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D064529E1F24197100DE4830 /* Cacher-MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cacher-MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06452C51F24215D00DE4830 /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06452CD1F24215D00DE4830 /* Cacher-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cacher-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06452F21F2424C500DE4830 /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06453061F242CDB00DE4830 /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
+		D06453071F242CDB00DE4830 /* NSImage+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+Utility.swift"; sourceTree = "<group>"; };
+		D064530B1F242D4700DE4830 /* Cacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
 		D0955CEA1ED7B30B002F323C /* Cacher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cacher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0955CED1ED7B30B002F323C /* Cacher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cacher.h; sourceTree = "<group>"; };
 		D0955CEE1ED7B30B002F323C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +120,43 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D06452921F24197000DE4830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D064529B1F24197100DE4830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D064529F1F24197100DE4830 /* Cacher.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452C11F24215D00DE4830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452CA1F24215D00DE4830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452CE1F24215D00DE4830 /* Cacher.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452EE1F2424C500DE4830 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0955CE61ED7B30B002F323C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,10 +175,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D06453051F242CDB00DE4830 /* Cacher-Mac */ = {
+			isa = PBXGroup;
+			children = (
+				D06453061F242CDB00DE4830 /* Cacher.h */,
+				D06453071F242CDB00DE4830 /* NSImage+Utility.swift */,
+			);
+			path = "Cacher-Mac";
+			sourceTree = "<group>";
+		};
+		D064530A1F242D4700DE4830 /* Cacher-watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				D064530B1F242D4700DE4830 /* Cacher.h */,
+			);
+			path = "Cacher-watchOS";
+			sourceTree = "<group>";
+		};
 		D0955CE01ED7B30B002F323C = {
 			isa = PBXGroup;
 			children = (
 				D0955CEC1ED7B30B002F323C /* Cacher */,
+				D06453051F242CDB00DE4830 /* Cacher-Mac */,
+				D064530A1F242D4700DE4830 /* Cacher-watchOS */,
 				D0955CF71ED7B30B002F323C /* CacherTests */,
 				D0955CEB1ED7B30B002F323C /* Products */,
 			);
@@ -90,6 +208,11 @@
 			children = (
 				D0955CEA1ED7B30B002F323C /* Cacher.framework */,
 				D0955CF31ED7B30B002F323C /* CacherTests.xctest */,
+				D06452961F24197000DE4830 /* Cacher.framework */,
+				D064529E1F24197100DE4830 /* Cacher-MacTests.xctest */,
+				D06452C51F24215D00DE4830 /* Cacher.framework */,
+				D06452CD1F24215D00DE4830 /* Cacher-tvOSTests.xctest */,
+				D06452F21F2424C500DE4830 /* Cacher.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +251,33 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		D06452931F24197000DE4830 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06453081F242CDB00DE4830 /* Cacher.h in Headers */,
+				D06452B21F24198400DE4830 /* NSString+Hash.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452C21F24215D00DE4830 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452E31F2421A400DE4830 /* NSString+Hash.h in Headers */,
+				D06452DC1F2421A400DE4830 /* Cacher.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452EF1F2424C500DE4830 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D064530C1F242D4700DE4830 /* Cacher.h in Headers */,
+				D06452FF1F2424D200DE4830 /* NSString+Hash.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0955CE71ED7B30B002F323C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -140,6 +290,96 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D06452951F24197000DE4830 /* Cacher-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06452A71F24197100DE4830 /* Build configuration list for PBXNativeTarget "Cacher-macOS" */;
+			buildPhases = (
+				D06452911F24197000DE4830 /* Sources */,
+				D06452921F24197000DE4830 /* Frameworks */,
+				D06452931F24197000DE4830 /* Headers */,
+				D06452941F24197000DE4830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cacher-macOS";
+			productName = "Cacher-Mac";
+			productReference = D06452961F24197000DE4830 /* Cacher.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D064529D1F24197100DE4830 /* Cacher-MacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06452AA1F24197100DE4830 /* Build configuration list for PBXNativeTarget "Cacher-MacTests" */;
+			buildPhases = (
+				D064529A1F24197100DE4830 /* Sources */,
+				D064529B1F24197100DE4830 /* Frameworks */,
+				D064529C1F24197100DE4830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D06452A11F24197100DE4830 /* PBXTargetDependency */,
+			);
+			name = "Cacher-MacTests";
+			productName = "Cacher-MacTests";
+			productReference = D064529E1F24197100DE4830 /* Cacher-MacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D06452C41F24215D00DE4830 /* Cacher-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06452D61F24215D00DE4830 /* Build configuration list for PBXNativeTarget "Cacher-tvOS" */;
+			buildPhases = (
+				D06452C01F24215D00DE4830 /* Sources */,
+				D06452C11F24215D00DE4830 /* Frameworks */,
+				D06452C21F24215D00DE4830 /* Headers */,
+				D06452C31F24215D00DE4830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cacher-tvOS";
+			productName = "Cacher-tvOS";
+			productReference = D06452C51F24215D00DE4830 /* Cacher.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D06452CC1F24215D00DE4830 /* Cacher-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06452D91F24215D00DE4830 /* Build configuration list for PBXNativeTarget "Cacher-tvOSTests" */;
+			buildPhases = (
+				D06452C91F24215D00DE4830 /* Sources */,
+				D06452CA1F24215D00DE4830 /* Frameworks */,
+				D06452CB1F24215D00DE4830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D06452D01F24215D00DE4830 /* PBXTargetDependency */,
+			);
+			name = "Cacher-tvOSTests";
+			productName = "Cacher-tvOSTests";
+			productReference = D06452CD1F24215D00DE4830 /* Cacher-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D06452F11F2424C500DE4830 /* Cacher-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D06452F71F2424C500DE4830 /* Build configuration list for PBXNativeTarget "Cacher-watchOS" */;
+			buildPhases = (
+				D06452ED1F2424C500DE4830 /* Sources */,
+				D06452EE1F2424C500DE4830 /* Frameworks */,
+				D06452EF1F2424C500DE4830 /* Headers */,
+				D06452F01F2424C500DE4830 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Cacher-watchOS";
+			productName = "Cacher-watchOS";
+			productReference = D06452F21F2424C500DE4830 /* Cacher.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		D0955CE91ED7B30B002F323C /* Cacher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0955CFE1ED7B30B002F323C /* Build configuration list for PBXNativeTarget "Cacher" */;
@@ -186,6 +426,29 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Mountain Buffalo Limited";
 				TargetAttributes = {
+					D06452951F24197000DE4830 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Manual;
+					};
+					D064529D1F24197100DE4830 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Manual;
+					};
+					D06452C41F24215D00DE4830 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YYCKCW8QEN;
+						ProvisioningStyle = Automatic;
+					};
+					D06452CC1F24215D00DE4830 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YYCKCW8QEN;
+						ProvisioningStyle = Automatic;
+					};
+					D06452F11F2424C500DE4830 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YYCKCW8QEN;
+						ProvisioningStyle = Automatic;
+					};
 					D0955CE91ED7B30B002F323C = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0830;
@@ -211,11 +474,55 @@
 			targets = (
 				D0955CE91ED7B30B002F323C /* Cacher */,
 				D0955CF21ED7B30B002F323C /* CacherTests */,
+				D06452951F24197000DE4830 /* Cacher-macOS */,
+				D064529D1F24197100DE4830 /* Cacher-MacTests */,
+				D06452C41F24215D00DE4830 /* Cacher-tvOS */,
+				D06452CC1F24215D00DE4830 /* Cacher-tvOSTests */,
+				D06452F11F2424C500DE4830 /* Cacher-watchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D06452941F24197000DE4830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D064529C1F24197100DE4830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452BA1F2419DE00DE4830 /* cacher2.png in Resources */,
+				D06452BB1F2419DE00DE4830 /* cacher.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452C31F24215D00DE4830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452CB1F24215D00DE4830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452EA1F2421B800DE4830 /* cacher2.png in Resources */,
+				D06452EB1F2421B800DE4830 /* cacher.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452F01F2424C500DE4830 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0955CE81ED7B30B002F323C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,6 +542,69 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D06452911F24197000DE4830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452AD1F24198400DE4830 /* Cache.swift in Sources */,
+				D06452B31F24198400DE4830 /* NSString+Hash.m in Sources */,
+				D06452AE1F24198400DE4830 /* DiskCache.swift in Sources */,
+				D06452B11F24198400DE4830 /* Precacher.swift in Sources */,
+				D06453091F242CDB00DE4830 /* NSImage+Utility.swift in Sources */,
+				D06452B41F24198400DE4830 /* String+Utility.swift in Sources */,
+				D06452B01F24198400DE4830 /* ImageCache.swift in Sources */,
+				D06452AF1F24198400DE4830 /* Downloader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D064529A1F24197100DE4830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452B71F2419DE00DE4830 /* CacherTests.swift in Sources */,
+				D06452B91F2419DE00DE4830 /* PrecacherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452C01F24215D00DE4830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452DE1F2421A400DE4830 /* Cache.swift in Sources */,
+				D06452E41F2421A400DE4830 /* NSString+Hash.m in Sources */,
+				D06452DF1F2421A400DE4830 /* DiskCache.swift in Sources */,
+				D06452E21F2421A400DE4830 /* Precacher.swift in Sources */,
+				D06452E51F2421A400DE4830 /* String+Utility.swift in Sources */,
+				D06452E61F2421A400DE4830 /* UIImageView+Cache.swift in Sources */,
+				D06452E11F2421A400DE4830 /* ImageCache.swift in Sources */,
+				D06452E01F2421A400DE4830 /* Downloader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452C91F24215D00DE4830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452E81F2421B800DE4830 /* ImageCacheTests.swift in Sources */,
+				D06452E71F2421B800DE4830 /* CacherTests.swift in Sources */,
+				D06452E91F2421B800DE4830 /* PrecacherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D06452ED1F2424C500DE4830 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06452FA1F2424D200DE4830 /* Cache.swift in Sources */,
+				D06453001F2424D200DE4830 /* NSString+Hash.m in Sources */,
+				D06452FB1F2424D200DE4830 /* DiskCache.swift in Sources */,
+				D06452FE1F2424D200DE4830 /* Precacher.swift in Sources */,
+				D06453011F2424D200DE4830 /* String+Utility.swift in Sources */,
+				D06452FD1F2424D200DE4830 /* ImageCache.swift in Sources */,
+				D06452FC1F2424D200DE4830 /* Downloader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0955CE51ED7B30B002F323C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +633,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D06452A11F24197100DE4830 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D06452951F24197000DE4830 /* Cacher-macOS */;
+			targetProxy = D06452A01F24197100DE4830 /* PBXContainerItemProxy */;
+		};
+		D06452D01F24215D00DE4830 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D06452C41F24215D00DE4830 /* Cacher-tvOS */;
+			targetProxy = D06452CF1F24215D00DE4830 /* PBXContainerItemProxy */;
+		};
 		D0955CF61ED7B30B002F323C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D0955CE91ED7B30B002F323C /* Cacher */;
@@ -271,6 +651,210 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		D06452A81F24197100DE4830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mountainbuffalo.Cacher;
+				PRODUCT_NAME = Cacher;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D06452A91F24197100DE4830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mountainbuffalo.Cacher;
+				PRODUCT_NAME = Cacher;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		D06452AB1F24197100DE4830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-MacTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D06452AC1F24197100DE4830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-MacTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		D06452D71F24215D00DE4830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-tvOS";
+				PRODUCT_NAME = Cacher;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		D06452D81F24215D00DE4830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-tvOS";
+				PRODUCT_NAME = Cacher;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
+		D06452DA1F24215D00DE4830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				INFOPLIST_FILE = Cacher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		D06452DB1F24215D00DE4830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				INFOPLIST_FILE = Cacher/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Release;
+		};
+		D06452F81F2424C500DE4830 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-watchOS";
+				PRODUCT_NAME = Cacher;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Debug;
+		};
+		D06452F91F2424C500DE4830 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YYCKCW8QEN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Cacher/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mountainbuffalo.Cacher-watchOS";
+				PRODUCT_NAME = Cacher;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.2;
+			};
+			name = Release;
+		};
 		D0955CFC1ED7B30B002F323C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -386,12 +970,15 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mountainduffalo.Cacher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -409,11 +996,14 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mountainduffalo.Cacher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -444,6 +1034,51 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D06452A71F24197100DE4830 /* Build configuration list for PBXNativeTarget "Cacher-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06452A81F24197100DE4830 /* Debug */,
+				D06452A91F24197100DE4830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06452AA1F24197100DE4830 /* Build configuration list for PBXNativeTarget "Cacher-MacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06452AB1F24197100DE4830 /* Debug */,
+				D06452AC1F24197100DE4830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06452D61F24215D00DE4830 /* Build configuration list for PBXNativeTarget "Cacher-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06452D71F24215D00DE4830 /* Debug */,
+				D06452D81F24215D00DE4830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06452D91F24215D00DE4830 /* Build configuration list for PBXNativeTarget "Cacher-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06452DA1F24215D00DE4830 /* Debug */,
+				D06452DB1F24215D00DE4830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D06452F71F2424C500DE4830 /* Build configuration list for PBXNativeTarget "Cacher-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D06452F81F2424C500DE4830 /* Debug */,
+				D06452F91F2424C500DE4830 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D0955CE41ED7B30B002F323C /* Build configuration list for PBXProject "Cacher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

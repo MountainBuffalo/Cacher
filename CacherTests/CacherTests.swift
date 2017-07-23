@@ -9,16 +9,32 @@
 import XCTest
 @testable import Cacher
 
+#if os(OSX)
+    import Cocoa
+    typealias UIColor = NSColor
+#else
+    import UIKit
+#endif
+
 fileprivate func colorImage(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-    let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-    UIGraphicsBeginImageContext(rect.size)
-    defer {
-        UIGraphicsEndImageContext()
-    }
-    let context = UIGraphicsGetCurrentContext()
-    context?.setFillColor(color.cgColor)
-    context?.fill(rect)
-    return UIGraphicsGetImageFromCurrentImageContext()!
+    #if os(OSX)
+        let image = NSImage(size: size)
+        image.lockFocus()
+        color.drawSwatch(in: NSRect(origin: .zero, size: size))
+        image.unlockFocus()
+        return image;
+        
+    #else
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    #endif
 }
 
 class CacherTests: XCTestCase {

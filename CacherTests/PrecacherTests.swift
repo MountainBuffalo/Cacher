@@ -30,7 +30,7 @@ class PrecacherTests: XCTestCase {
     }
 
     func testImagesDownload() {
-        let bundle = Bundle(for: ImageCacheTests.self)
+        let bundle = Bundle(for: PrecacherTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
 
         let urls = [imageUrl!]
@@ -48,10 +48,15 @@ class PrecacherTests: XCTestCase {
     }
 
     func testImagesLoadFromCache() throws {
-        let bundle = Bundle(for: ImageCacheTests.self)
+        let bundle = Bundle(for: PrecacherTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")!
-        let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)!
-        try cache.add(item: image, for: imageUrl, type: .memory)
+        #if os(macOS)
+            let image = UIImage(contentsOf: imageUrl)
+            #else
+            let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)
+            #endif
+        
+        try cache.add(item: image!, for: imageUrl, type: .memory)
 
         let urls = [imageUrl]
 

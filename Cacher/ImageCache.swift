@@ -6,16 +6,28 @@
 //  Copyright © 2017 Mountain Buffalo Limited. All rights reserved.
 //
 
+#if os(OSX)
+import Cocoa
+#else
 import UIKit
+#endif
 
 public var SaveImagesAsPNG = false
 
 extension UIImage: Cacheable {
     public func getDataRepresentation() -> Data? {
         if SaveImagesAsPNG {
-            return UIImagePNGRepresentation(self)
+            #if os(OSX)
+                return NSImagePNGRepresentation(self)
+            #else
+                return UIImagePNGRepresentation(self)
+            #endif
         } else {
-            return UIImageJPEGRepresentation(self, 1.0)
+            #if os(OSX)
+                return NSImageJPEGRepresentation(self, 1.0)
+            #else
+                return UIImageJPEGRepresentation(self, 1.0)
+            #endif
         }
     }
 }
