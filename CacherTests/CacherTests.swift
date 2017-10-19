@@ -142,6 +142,23 @@ class CacherTests: XCTestCase {
         let loadedItem = cache.item(for: "cacherImage", type: .disk)
         XCTAssertNil(loadedItem)
     }
+    
+    func testSubscriptGetterAndSetter() throws {
+        let image = colorImage(from: UIColor.green)
+        cache["cacherImage"] = image
+        let loadedItem = cache["cacherImage"]
+        
+        XCTAssertEqual(image, loadedItem)
+    }
+    
+    
+    func testSubscriptRemoval() throws {
+        let image = colorImage(from: UIColor.green)
+        cache["cacherImage"] = image
+        cache["cacherImage"] = nil
+        
+        XCTAssertNil(cache["cacherImage"])
+    }
 }
 
 class CacherPathTests: XCTestCase {
