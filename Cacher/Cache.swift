@@ -82,14 +82,12 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
     /// Initlizes the class
     ///
     /// - Parameter directory: An optional directory where disk cache is saved
-    public init(directory: String? = nil) {
-        cache = NSCache()
-        diskCache = DiskCache<Key, Item>(directory: directory)
+    public convenience init(directory: String? = nil) {
+        self.init(diskCache: DiskCache<Key, Item>(directory: directory))
     }
     
-    init(diskCache: DiskCache<Key, Item>) {
+    public init(diskCache: DiskCache<Key, Item>) {
         cache = NSCache()
-        
         self.diskCache = diskCache
     }
     
@@ -108,7 +106,7 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
     private func add(item: Item, for key: Key, type: CachedItemType = .default, isSaved: Bool) throws -> Element {
         let newItem = Element(item: item, type: type)
         
-        let itemType = (type == .default) ? self.cacheType : type
+        let itemType = self.itemType(from: type)
         
         if itemType.shouldMemoryCache {
             cache.setObject(newItem, forKey: key.toObjectType())
@@ -128,17 +126,19 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
     ///   - type: The type of cache the item is loaded from. If memory then it will only check memory. The default is to use cacheType on this class
     /// - Returns: The item found based of the key or returns nil if not found
     public func item(for key: Key, type: CachedItemType = .default) -> Element? {
+        let cacheType = itemType(from: type)
+        
         if let item = cache.object(forKey: key.toObjectType()) {
             return item
         }
         
-        guard type != .memory, let value = diskCache.item(forKey: key) else {
+        guard cacheType != .memory, let value = diskCache.item(forKey: key) else {
             return nil
         }
         
         let newItem = CachedItem(item: value, type: .disk)
         
-        if type != .diskOnly {
+        if cacheType != .diskOnly {
             //We got this far so the image isnt in memory cache so lets add it.
             cache.setObject(newItem, forKey: key.toObjectType())
         }
@@ -161,7 +161,7 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
             return
         }
         
-        let itemType: CachedItemType = (cacheType == .default) ? self.cacheType : cacheType
+        let itemType: CachedItemType = self.itemType(from: cacheType)
         
         downloader.get(with: url) { [weak self] (data, error) in
             guard let data = data else {
@@ -201,7 +201,7 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
     @discardableResult public func removeItem(withKey key: Key) throws -> Element? {
         let object = cache.object(forKey: key.toObjectType())
         cache.removeObject(forKey: key.toObjectType())
-        if let item = object, item.type.shouldSave {
+        if let item = object, itemType(from: item.type).shouldSave {
             try diskCache.delete(for: key)
         }
         return object
@@ -209,5 +209,26 @@ open class Cache<Key: CacheableKey, Item: Cacheable> {
     
     public func removeMemoryCache() {
         cache.removeAllObjects()
+    }
+    
+    fileprivate func itemType(from: CachedItemType) -> CachedItemType {
+        guard self.cacheType != .default else {
+            fatalError("CacheType.default is undefined on cache.cacheType")
+        }
+        return (from == .default) ? self.cacheType : from
+    }
+}
+
+extension Cache {
+    subscript(_ key: Key) -> Item? {
+        get {
+            return self.item(for: key)?.item
+        } set {
+            guard let newItem = newValue else {
+                _ = try? self.removeItem(withKey: key)
+                return
+            }
+            _ = try? self.add(item: newItem, for: key)
+        }
     }
 }

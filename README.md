@@ -1,7 +1,7 @@
 <p align="center"> <img src="cacher.png"/> </p>
 
 #  [![build-badge]][build-link] [![codecov-badge]][codecov-link] [![license-badge]][license-link]
-A simple general use cache written entirely in swift. Anything can be added to the cache as long as it subscribes to the `Cacheable` protocol, and anything as a key as long as it subscribes to `CacheableKey` protocol. 
+A simple general use cache written entirely in swift. Anything can be added to the cache as long as it subscribes to the `Cacheable` protocol, and anything as a key as long as it subscribes to `CacheableKey` protocol.
 
 ## Features
 - Lightweight Caching generic
@@ -17,12 +17,12 @@ let cache = Cache<String: Data>()
 Add an item to a cache
 ```swift
 let item = Data()
-cache.add(item: item, for: "MyItem")
+cache["MyItem"] = item
 ```
 
 Get an item from cache
 ```swift
-let cachedItem = cache.item(for: "MyItem")
+let cachedItem = cache["MyItem"]
 ```
 
 Get an item from a url
@@ -37,12 +37,12 @@ cache.load(from: someUrl, key: "MyItem") { cachedItem, wasDownload, error in
 Add an item to a cache
 ```swift
 let image = UIImage()
-ImageCache.shared.add(item: image, for: "MyItem")
+ImageCache.shared["MyItem"] = image
 ```
 
 Get an item from cache
 ```swift
-let cachedImage = ImageCache.shared.item(for: "MyItem").item
+let cachedImage = ImageCache.shared["MyItem"]
 ```
 
 Setting an image on an image view
