@@ -12,11 +12,11 @@ public typealias UIImage = NSImage
 
 extension NSBitmapImageRep {
     var png: Data? {
-        return representation(using: .PNG, properties: [:])
+        return representation(using: .png, properties: [:])
         
     }
     func jpeg(compressionFactor: CGFloat) -> Data? {
-        return representation(using: .JPEG, properties: [NSImageCompressionFactor: compressionFactor])
+        return representation(using: .jpeg, properties: [NSImageCompressionFactor: compressionFactor])
     }
 }
 extension Data {

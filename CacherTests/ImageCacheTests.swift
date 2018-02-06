@@ -32,7 +32,7 @@ class ImageCacheTests: XCTestCase {
         let expectation = self.expectation(description: "ImageDownload")
         
         var didDownload = true
-        imageView.set(url: imageUrl!, cacheType: .memory, completion: { (_, downloaded) in
+        imageView.setImage(with: imageUrl!, cacheType: .memory, completion: { (_, downloaded) in
             didDownload = downloaded
             expectation.fulfill()
         })
@@ -47,14 +47,14 @@ class ImageCacheTests: XCTestCase {
         let bundle = Bundle(for: ImageCacheTests.self)
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
         let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)!
-        try ImageCache.shared.add(item: image, for: imageUrl!)
+        try ImageCache.shared.add(item: image, for: imageUrl!, cost: .small)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
         let expectation = self.expectation(description: "ImageDownload")
         
         var didDownload = true
-        imageView.set(url: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
+        imageView.setImage(with: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
             didDownload = downloaded
             expectation.fulfill()
         })
@@ -72,7 +72,7 @@ class ImageCacheTests: XCTestCase {
         
         let expectation = self.expectation(description: "ImageDownload")
         
-        imageView.set(url: imageUrl!, cacheType: .memory, error: { error in
+        imageView.setImage(with: imageUrl!, cacheType: .memory, error: { error in
             expectation.fulfill()
         })
         
@@ -88,7 +88,7 @@ class ImageCacheTests: XCTestCase {
         
         let expectation = self.expectation(description: "ImageDownload")
         
-        imageView.set(url: imageUrl!, cacheType: .memory, error: { error in
+        imageView.setImage(with: imageUrl!, cacheType: .memory, error: { error in
             expectation.fulfill()
         })
         
@@ -109,13 +109,13 @@ class ImageCacheTests: XCTestCase {
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
-        imageView.set(url: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
+        imageView.setImage(with: imageUrl!, cacheType: .disk, completion: { (_, downloaded) in
             //This should never be called
             numberOfTimesSet += 1
             expectation.fulfill()
         })
         
-        imageView.set(url: imageUrl2!, cacheType: .disk, completion: { (_, downloaded) in
+        imageView.setImage(with: imageUrl2!, cacheType: .disk, completion: { (_, downloaded) in
             if downloaded {
                 numberOfTimesSet += 1
             }

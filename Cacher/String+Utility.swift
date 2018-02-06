@@ -1,6 +1,6 @@
 //
 //  String+Utility.swift
-//  ImageCacher
+//  Cacher
 //
 //  Created by Justin Anderson on 4/29/17.
 //  Copyright © 2017 Mountain Buffalo Limited. All rights reserved.
@@ -9,9 +9,16 @@
 import Foundation
 
 extension String {
+    func base64(encoding: String.Encoding = .utf8) -> String? {
+        return self.data(using: encoding)?.base64EncodedString()
+    }
     
-    var sha1: String {
-        return (self as NSString).sha1()
+    init?(base64: String, encoding: String.Encoding = .utf8) {
+        guard let data = Data(base64Encoded: base64), let value = String(data: data, encoding: encoding) else {
+            return nil
+        }
+        
+        self = value
     }
     
     func appending(pathExtension: String) -> String {
@@ -26,15 +33,21 @@ extension String: CacheableKey {
         return self as NSString
     }
     
-    public var stringValue: String {
+    public init?(stringValue: String) {
+        self = stringValue
+    }
+    
+    public var stringValue: String? {
         return self
     }
 }
 
-extension FileManager {
+extension Data: DiskCacheable {
+    public static func item(from cacheData: Data) -> Cacheable? {
+        return cacheData
+    }
     
-    func fileExists(atFileURL url: URL) -> Bool {
-        guard url.isFileURL else { return false }
-        return self.fileExists(atPath: url.path)
+    public var diskCacheData: Data? {
+        return self
     }
 }

@@ -1,16 +1,16 @@
 language: objective-c
-osx_image: xcode8.3
+osx_image: xcode9.2
 env:
   global:
   - WORKSPACE=Cacher.xcworkspace
   - IOS_FRAMEWORK_SCHEME="Cacher"
-  - IOS_SDK=iphonesimulator10.3
+  - IOS_SDK=iphonesimulator11.2
   - TVOS_FRAMEWORK_SCHEME="Cacher-tvOS"
-  - TVOS_SDK=appletvsimulator10.2
+  - TVOS_SDK=appletvsimulator11.2
 
-  matrix: 
-    - DESTINATION="OS=10.3.1,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
-    - DESTINATION="OS=10.2,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"     SDK="$TVOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
+  matrix:
+    - DESTINATION="OS=11.2,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
+    - DESTINATION="OS=11.2,name=Apple TV"    SCHEME="$TVOS_FRAMEWORK_SCHEME"     SDK="$TVOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
 
 script:
   - set -o pipefail
