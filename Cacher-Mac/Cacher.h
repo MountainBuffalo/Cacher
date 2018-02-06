@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double CacherVersionNumber;
 FOUNDATION_EXPORT const unsigned char CacherVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Cacher/PublicHeader.h>
-
-#import <Cacher/NSString+Hash.h>

@@ -56,7 +56,7 @@ class PrecacherTests: XCTestCase {
             let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)
             #endif
         
-        try cache.add(item: image!, for: imageUrl, type: .memory)
+        try cache.add(item: image!, for: imageUrl, type: .memory, cost: .small)
 
         let urls = [imageUrl]
 

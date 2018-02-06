@@ -17,24 +17,26 @@ open class Precacher<Item: Cacheable> {
 
     fileprivate let cache: Cache<Key, Item>
 
-    fileprivate let queue = DispatchQueue(label: "com.wayfair.precacher", attributes: .concurrent)
-    fileprivate let synchronizedQueue = DispatchQueue(label: "com.wayfair.precacher.synchronizedQueue")
+    fileprivate let queue = DispatchQueue(label: "com.mountainbuffalo.precacher", attributes: .concurrent)
+    fileprivate let synchronizedQueue = DispatchQueue(label: "com.mountainbuffalo.precacher.synchronizedQueue")
 
     fileprivate var finishedCount: Int = 0
     fileprivate var skippedCount: Int = 0
     fileprivate var requestCount: Int = 0
+    
     fileprivate var failedUrls: [URL] = []
-    fileprivate var finishedItems: [Item] = []
     fileprivate var completion: PrecacherDownloadCompletion?
-
+    fileprivate var finishedItems: [URL: Item] = [:]
+    fileprivate var urlsToDownload: [URL] = []
+    
     /// Designated Initializer
     ///
     /// - Parameter cache: The cached downloaded items are save to
     public init(cache: Cache<Key, Item>) {
         self.cache = cache
     }
-
-    /// Gets the urls from the array and adds them to the cache. 
+    
+    /// Gets the urls from the array and adds them to the cache.
     ///
     /// - Note: Invoking this function multiple times on the same reference before the completion is returned is undefined
     /// - Parameters:
@@ -50,40 +52,59 @@ open class Precacher<Item: Cacheable> {
 
 //MARK: - dataRequests loading
 extension Precacher {
-
+    
     fileprivate func dataRequestsGet(urls: [URL], cacheType: CachedItemType, completion: PrecacherDownloadCompletion?) {
         finishedCount = 0
         skippedCount = 0
         requestCount = urls.count
         failedUrls.removeAll()
         finishedItems.removeAll()
-
+        urlsToDownload.removeAll()
         finishedCount = 0
-
+        urlsToDownload = urls
+        
         urls.forEach { url in
             queue.async {
                 self.get(url: url, cacheType: cacheType)
             }
         }
     }
-
+    
     fileprivate func notifyCompletion() {
+        // Return the array of downloaded items with nils removed and in the same order as the urls to download were passed in
+        let items = self.finishedItems
+        let actualDownloadedItems = self.urlsToDownload.flatMap { items[$0] }
         DispatchQueue.main.async {
-            self.completion?(self.finishedItems, self.failedUrls)
+            self.completion?(actualDownloadedItems, self.failedUrls)
         }
     }
-
-    fileprivate func itemDownloaded(item: Item?, url: URL, hasError: Bool) {
-
+    
+    fileprivate func itemDownloaded(response: CacheResponse<Item>, url: URL) {
+        
+        let item: CachedItem<Item>?
+        let hasError: Bool
+        
+        switch response {
+        case .success(let data, _):
+            item = data
+            hasError = false
+        case .zeroCacheAge(let data):
+            item = data
+            hasError = true
+        case .failure(_):
+            item = nil
+            hasError = true
+        }
+        
         if hasError {
             self.synchronizedQueue.sync { self.failedUrls.append(url) }
         }
-
+        
         self.synchronizedQueue.sync {
             if let newItem = item {
-                self.finishedItems.append(newItem)
+                finishedItems[url] = newItem.item
             }
-
+            
             finishedCount += 1
             
             if finishedCount == requestCount {
@@ -91,11 +112,10 @@ extension Precacher {
             }
         }
     }
-
+    
     private func get(url: URL, cacheType: CachedItemType) {
-        cache.load(from: url, key: url, cacheType: cacheType) { [weak self] (item, didDownload, error) in
-            let hasError = item == nil || error != nil
-            self?.itemDownloaded(item: item?.item, url: url, hasError: hasError)
+        cache.load(from: url, key: url, cacheType: cacheType) { [weak self] (response) in
+            self?.itemDownloaded(response: response, url: url)
         }
     }
 }

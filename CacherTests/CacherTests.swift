@@ -16,7 +16,7 @@ import XCTest
     import UIKit
 #endif
 
-fileprivate func colorImage(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+func colorImage(from color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
     #if os(OSX)
         let image = NSImage(size: size)
         image.lockFocus()
@@ -54,7 +54,7 @@ class CacherTests: XCTestCase {
     
     func testThatItemsAreAddedToCache() throws {
         let image = colorImage(from: UIColor.green)
-        let addedItem = try cache.add(item: image, for: "cacherImage")
+        let addedItem = try cache.add(item: image, for: "cacherImage", cost: .small)
         let loadedItem = cache.item(for: "cacherImage")
         
         XCTAssertEqual(addedItem.item, loadedItem?.item)
@@ -63,7 +63,7 @@ class CacherTests: XCTestCase {
     
     func testThatItemsGetRemovedFromCache() throws {
         let image = colorImage(from: UIColor.green)
-        try cache.add(item: image, for: "cacherImage")
+        try cache.add(item: image, for: "cacherImage", cost: .small)
         try cache.removeItem(withKey: "cacherImage")
         let loadedItem = cache.item(for: "cacherImage", type: .memory)
         
@@ -72,7 +72,7 @@ class CacherTests: XCTestCase {
     
     func testThatItemsAreAddedToDiskCache() throws {
         let image = colorImage(from: UIColor.green)
-        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk)
+        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk, cost: .small)
         let loadedItem = cache.item(for: "cacherImage")
         
         XCTAssertEqual(addedItem.item, loadedItem?.item)
@@ -85,7 +85,7 @@ class CacherTests: XCTestCase {
     
     func testThatItemsAreRemovedFromDiskCache() throws {
         let image = colorImage(from: UIColor.green)
-        try cache.add(item: image, for: "cacherImage", type: .disk)
+        try cache.add(item: image, for: "cacherImage", type: .disk, cost: .small)
         try cache.removeItem(withKey: "cacherImage")
         
         let fileName = "cacherImage".appending(pathExtension: "cache")
@@ -96,19 +96,19 @@ class CacherTests: XCTestCase {
     func testThatItemsLoadFromDisk() throws {
         let image = colorImage(from: UIColor.green)
         Cacher.SaveImagesAsPNG = true
-        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk)
+        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk, cost: .small)
         cache.removeMemoryCache()
         
         let loadedItem = cache.item(for: "cacherImage", type: .disk)
         
-        XCTAssertEqual(addedItem.item.getDataRepresentation(), loadedItem?.item.getDataRepresentation())
+        XCTAssertEqual(addedItem.item.diskCacheData, loadedItem?.item.diskCacheData)
         XCTAssertEqual(addedItem.type, loadedItem?.type)
         Cacher.SaveImagesAsPNG = false
     }
     
     func testThatDropMemoryCacheClearCache() throws {
         let image = colorImage(from: UIColor.green)
-        try cache.add(item: image, for: "cacherImage")
+        try cache.add(item: image, for: "cacherImage", cost: .small)
         cache.removeMemoryCache()
         
         let loadedItem = cache.item(for: "cacherImage", type: .memory)
@@ -118,7 +118,7 @@ class CacherTests: XCTestCase {
     
     func testThatDeletingDiskCacheRemovesItmes() throws {
         let image = colorImage(from: UIColor.green)
-        try cache.add(item: image, for: "cacherImage", type: .disk)
+        try cache.add(item: image, for: "cacherImage", type: .disk, cost: .small)
         try cache.diskCache.deleteDiskCache()
         cache.removeMemoryCache()
         let loadedItem = cache.item(for: "cacherImage", type: .memory)
@@ -158,58 +158,5 @@ class CacherTests: XCTestCase {
         cache["cacherImage"] = nil
         
         XCTAssertNil(cache["cacherImage"])
-    }
-}
-
-class CacherPathTests: XCTestCase {
-    
-    var cache: Cache<String, UIImage>!
-    var fileName: String!
-    var filePath: URL!
-    
-    override func setUp() {
-        super.setUp()
-        
-        fileName = "cacherImage".appending(pathExtension: "cache")
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        _ = try? cache.diskCache.deleteDiskCache()
-        _ = try? FileManager.default.removeItem(at: cache.diskCache.cacheUrl)
-    }
-    
-    func testThatItemsAddedToDiskCacheWithNewPath() throws {
-        cache = Cache()
-        
-        let newPath = cache.diskCache.cacheUrl.appendingPathComponent("images")
-        XCTAssertFalse(FileManager.default.fileExists(atFileURL: newPath))
-        
-        cache.diskCache.cacheUrl = newPath
-        
-        let image = colorImage(from: UIColor.green)
-        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk)
-        let loadedItem = cache.item(for: "cacherImage")
-        
-        XCTAssertEqual(addedItem.item, loadedItem?.item)
-        XCTAssertEqual(addedItem.type, loadedItem?.type)
-        filePath = cache.diskCache.cacheUrl.appendingPathComponent(fileName)
-        XCTAssertTrue(FileManager.default.fileExists(atFileURL: filePath))
-    }
-    
-    func testThatItemsAddedToDiskCacheWithCacheDirectory() throws {
-        cache = Cache(directory: "images")
-        
-        let newPath = cache.diskCache.cacheUrl.appendingPathComponent("images")
-        XCTAssertFalse(FileManager.default.fileExists(atFileURL: newPath))
-        
-        let image = colorImage(from: UIColor.green)
-        let addedItem = try cache.add(item: image, for: "cacherImage", type: .disk)
-        let loadedItem = cache.item(for: "cacherImage")
-        
-        XCTAssertEqual(addedItem.item, loadedItem?.item)
-        XCTAssertEqual(addedItem.type, loadedItem?.type)
-        filePath = cache.diskCache.cacheUrl.appendingPathComponent(fileName)
-        XCTAssertTrue(FileManager.default.fileExists(atFileURL: filePath))
     }
 }
