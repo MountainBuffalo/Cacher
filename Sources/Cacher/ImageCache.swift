@@ -11,7 +11,7 @@ import Cocoa
 #else
 import UIKit
 
-public protocol ImageDownloadDelegate: class {
+public protocol ImageDownloadDelegate: AnyObject {
     func didReceiveCacheError(error: CacheError, url: URL, view: UIView?)
 }
 #endif

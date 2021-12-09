@@ -30,8 +30,7 @@ class PrecacherTests: XCTestCase {
     }
 
     func testImagesDownload() {
-        let bundle = Bundle(for: PrecacherTests.self)
-        let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
+        let imageUrl = Bundle.module.url(forResource: "cacher", withExtension: "png")
 
         let urls = [imageUrl!]
 
@@ -48,7 +47,7 @@ class PrecacherTests: XCTestCase {
     }
 
     func testImagesLoadFromCache() throws {
-        let bundle = Bundle(for: PrecacherTests.self)
+        let bundle = Bundle.module
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")!
         #if os(macOS)
             let image = UIImage(contentsOf: imageUrl)

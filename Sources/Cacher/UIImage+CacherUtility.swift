@@ -25,13 +25,13 @@ extension Image: DiskCacheable {
             #if os(OSX)
                 return NSImagePNGRepresentation(self)
             #else
-                return UIImagePNGRepresentation(self)
+            return self.pngData()
             #endif
         } else {
             #if os(OSX)
                 return NSImageJPEGRepresentation(self, 1.0)
             #else
-                return UIImageJPEGRepresentation(self, 1.0)
+            return self.jpegData(compressionQuality: 1.0)
             #endif
         }
     }

@@ -90,24 +90,24 @@ internal struct SHA1 {
     private static func process(data: inout Data) -> SHA1.context? {
         var context = SHA1.context()
         var w = ContiguousArray<UInt32>(repeating: 0x00000000, count: CHUNKSIZE) // Initialise empty chunk
-        let ml = data.count << 3                                        // Message length in bits
-        var range = Range(0..<64)                                     // A chunk is 64 bytes
+        let ml = data.count << 3 // Message length in bits
+        var range = 0..<64 // A chunk is 64 bytes
         
         // If the remainder of the message is more than or equal 64 bytes
         while data.count >= range.upperBound {
             //print("Reading \(range.count) bytes @ position \(range.lowerBound)")
             w.withUnsafeMutableBufferPointer { dest in
-                _ = data.copyBytes(to: dest, from: range)               // Retrieve one chunk
+                data.copyBytes(to: dest, from: range)               // Retrieve one chunk
             }
             context.process(chunk: &w)                                // Process the chunk
-            range = Range(range.upperBound..<range.upperBound + 64)     // Make range for next chunk
+            range = range.upperBound..<range.upperBound + 64     // Make range for next chunk
         }
         
         // Handle remainder of message that is <64 bytes in length
         w = ContiguousArray<UInt32>(repeating: 0x00000000, count: CHUNKSIZE) // Initialise empty chunk
-        range = Range(range.lowerBound..<data.count)                  // Range for remainder of message
+        range = range.lowerBound..<data.count                  // Range for remainder of message
         w.withUnsafeMutableBufferPointer { dest in
-            _ = data.copyBytes(to: dest, from: range)                   // Retrieve remainder
+            data.copyBytes(to: dest, from: range)                   // Retrieve remainder
         }
         let bytetochange = range.count % 4                              // The bit to the right of the
         let shift = UInt32(bytetochange * 8)                          // last bit of the actual message

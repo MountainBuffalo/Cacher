@@ -24,8 +24,7 @@ class ImageCacheTests: XCTestCase {
     }
     
     func testImageViewSetterDownload() {
-        let bundle = Bundle(for: ImageCacheTests.self)
-        let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
+        let imageUrl = Bundle.module.url(forResource: "cacher", withExtension: "png")
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         
@@ -44,9 +43,8 @@ class ImageCacheTests: XCTestCase {
     
     func testImageVeiwSetterCache() throws {
         
-        let bundle = Bundle(for: ImageCacheTests.self)
-        let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
-        let image = UIImage(named: "cacher", in: bundle, compatibleWith: nil)!
+        let imageUrl = Bundle.module.url(forResource: "cacher", withExtension: "png")
+        let image = UIImage(named: "cacher", in: Bundle.module, compatibleWith: nil)!
         try ImageCache.shared.add(item: image, for: imageUrl!, cost: .small)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -100,7 +98,7 @@ class ImageCacheTests: XCTestCase {
         
         let expectation = self.expectation(description: "Wait for image download")
         
-        let bundle = Bundle(for: ImageCacheTests.self)
+        let bundle = Bundle.module
         let imageUrl = bundle.url(forResource: "cacher", withExtension: "png")
         
         let imageUrl2 = bundle.url(forResource: "cacher2", withExtension: "png")

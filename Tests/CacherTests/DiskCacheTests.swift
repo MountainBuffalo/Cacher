@@ -55,8 +55,8 @@ class DiskCacheTests: XCTestCase {
         super.setUp()
         self.fileManager = MockFileManager()
         self.diskCache = DiskCache(directory: nil, fileManager: fileManager)
-        let bundle = Bundle(for: DiskCacheTests.self)
-        let url = bundle.url(forResource: "cacher2", withExtension: "png")!
+//        let bundle = Bundle(for: DiskCacheTests.self)
+        let url = Bundle.module.url(forResource: "cacher2", withExtension: "png")!
         self.data = try! Data(contentsOf: url)
     }
     

@@ -328,13 +328,13 @@ extension DiskCache where Item : FileCacheable, Key == String {
     internal func fileDownloaded(to file: URL, description: String?) -> URL? {
         let item = Item.item(from: file) as? Item
         
-        guard let fileName = description ?? file.stringValue, let destination = URL(string: fileName, relativeTo: self.cacheUrl), let key = description, let fileLocation = try? item?.postDownloadActions(destination: destination), let location = fileLocation else {
+        guard let fileName = description ?? file.stringValue, let destination = URL(string: fileName, relativeTo: self.cacheUrl), let key = description, let fileLocation = try? item?.postDownloadActions(destination: destination) else {
             return nil
         }
         
-        addCheckSize(key: key, item: DiskItem(location: location, lastAccess: Date()))
+        addCheckSize(key: key, item: DiskItem(location: fileLocation, lastAccess: Date()))
         
-        return location
+        return fileLocation
     }
 }
 

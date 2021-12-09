@@ -73,7 +73,7 @@ extension Precacher {
     fileprivate func notifyCompletion() {
         // Return the array of downloaded items with nils removed and in the same order as the urls to download were passed in
         let items = self.finishedItems
-        let actualDownloadedItems = self.urlsToDownload.flatMap { items[$0] }
+        let actualDownloadedItems = self.urlsToDownload.compactMap { items[$0] }
         DispatchQueue.main.async {
             self.completion?(actualDownloadedItems, self.failedUrls)
         }

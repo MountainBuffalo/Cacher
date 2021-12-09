@@ -6,7 +6,9 @@
 //  Copyright © 2017 Mountain Buffalo Limited. All rights reserved.
 //
 
+#if canImport(Cocoa)
 import Cocoa
+import Darwin
 
 public typealias UIImage = NSImage
 
@@ -32,3 +34,5 @@ public func NSImagePNGRepresentation(_ image: NSImage) -> Data? {
 public func NSImageJPEGRepresentation(_ image: NSImage, _ compressionFactor: CGFloat) -> Data? {
     return image.tiffRepresentation?.bitmap?.jpeg(compressionFactor: 1.0)
 }
+
+#endif
