@@ -65,3 +65,5 @@ Carthage/Checkouts
 # Exclude the Pods directory
 Pods
 Pods/*
+
+.swiftpm
